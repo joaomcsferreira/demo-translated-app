@@ -3,6 +3,11 @@ import { getCookie, hasCookie, setCookie } from "cookies-next";
 
 const languages = [
   {
+    label: "Português",
+    value: "/auto/pt",
+    image: "https://flagcdn.com/h40/br.png",
+  },
+  {
     label: "Inglês",
     value: "/auto/en",
     image: "https://flagcdn.com/h40/us.png",
@@ -11,11 +16,6 @@ const languages = [
     label: "Espanhol",
     value: "/auto/es",
     image: "https://flagcdn.com/h40/es.png",
-  },
-  {
-    label: "Português",
-    value: "/auto/pt",
-    image: "https://flagcdn.com/h40/br.png",
   },
 ];
 
