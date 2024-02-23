@@ -3,9 +3,21 @@ import { SelectPicker } from "rsuite";
 import { getCookie, hasCookie, setCookie } from "cookies-next";
 
 const languages = [
-  { label: "English", value: "/auto/en" },
-  { label: `Русский`, value: "/auto/ru" },
-  { label: "Polski", value: "/auto/pl" },
+  {
+    label: "Inglês",
+    value: "/auto/en",
+    image: "https://flagcdn.com/h40/us.png",
+  },
+  {
+    label: "Espanhol",
+    value: "/auto/es",
+    image: "https://flagcdn.com/h40/es.png",
+  },
+  {
+    label: "Português",
+    value: "/auto/pt",
+    image: "https://flagcdn.com/h40/br.png",
+  },
 ];
 
 const GoogleTranslate = () => {
@@ -62,7 +74,7 @@ const GoogleTranslate = () => {
     if (hasCookie("googtrans")) {
       setSelected(getCookie("googtrans"));
     } else {
-      setSelected("/auto/en");
+      setSelected("/auto/pt");
     }
   }, []);
 
@@ -92,6 +104,14 @@ const GoogleTranslate = () => {
         onSelect={(e, m, evt) => langChange(e, m, evt)}
         placeholder="Lang"
       /> */}
+
+      {languages.map((language) => (
+        <img
+          key={language.label}
+          src={language.image}
+          onClick={() => langChange(language.value)}
+        />
+      ))}
 
       <button onClick={() => langChange("/auto/en")}>English</button>
       <button onClick={() => langChange("/auto/es")}>Spanish</button>
