@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { SelectPicker } from "rsuite";
 import { getCookie, hasCookie, setCookie } from "cookies-next";
 
 const languages = [
@@ -21,44 +20,29 @@ const languages = [
 ];
 
 const GoogleTranslate = () => {
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState<string | null>(null);
 
   const googleTranslateElementInit = () => {
     new window.google.translate.TranslateElement(
       {
         pageLanguage: "pt",
         autoDisplay: false,
-        includedLanguages: "en,es,pt", // If you remove it, by default all google supported language will be included
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        includedLanguages: "en,es,pt",
+        layout: window.google.translate.TranslateElement.InlineLayout.TOP_LEFT,
       },
       "google_translate_element"
     );
   };
 
-  // const langChange = (e, m, evt) => {
-  //   evt.preventDefault();
-  //   if (hasCookie("googtrans")) {
-  //     setCookie("googtrans", decodeURI(e));
-  //     console.log(e);
-  //     setSelected(e);
-  //   } else {
-  //     setCookie("googtrans", e);
-  //     console.log(e);
-  //     setSelected(e);
-  //   }
-  //   window.location.reload();
-  // };
-
   const langChange = (e: string) => {
     if (hasCookie("googtrans")) {
       setCookie("googtrans", decodeURI(e));
-      console.log(e);
       setSelected(e);
     } else {
       setCookie("googtrans", e);
-      console.log(e);
       setSelected(e);
     }
+
     window.location.reload();
   };
 
@@ -72,7 +56,8 @@ const GoogleTranslate = () => {
     window.googleTranslateElementInit = googleTranslateElementInit;
 
     if (hasCookie("googtrans")) {
-      setSelected(getCookie("googtrans"));
+      const cookie = getCookie("googtrans")!;
+      setSelected(cookie);
     } else {
       setSelected("/auto/pt");
     }
@@ -92,30 +77,22 @@ const GoogleTranslate = () => {
         }}
       ></div>
 
-      {/* <SelectPicker
-        data={languages}
-        style={{ width: 100 }}
-        placement="bottomEnd"
-        cleanable={false}
-        value={selected}
-        searchable={false}
-        className={"notranslate"}
-        menuClassName={"notranslate"}
-        onSelect={(e, m, evt) => langChange(e, m, evt)}
-        placeholder="Lang"
-      /> */}
-
-      {languages.map((language) => (
-        <img
-          key={language.label}
-          src={language.image}
-          onClick={() => langChange(language.value)}
-        />
-      ))}
-
-      <button onClick={() => langChange("/auto/en")}>English</button>
-      <button onClick={() => langChange("/auto/es")}>Spanish</button>
-      <button onClick={() => langChange("/auto/pt")}>Portuguese</button>
+      <div style={{ display: "flex", gap: "0.5rem" }}>
+        {languages.map((language) => (
+          <img
+            key={language.label}
+            src={language.image}
+            onClick={() => langChange(language.value)}
+            style={{
+              borderRadius: "50%",
+              width: "2rem",
+              height: "2rem",
+              objectFit: "cover",
+              cursor: "pointer",
+            }}
+          />
+        ))}
+      </div>
     </>
   );
 };
