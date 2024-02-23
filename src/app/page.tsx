@@ -34,43 +34,38 @@ export const useEffectOnce = (effect: () => void | (() => void)) => {
 };
 
 export default function Home() {
-  const [text, setText] = useState(
-    `O sol brilha intensamente no céu azul, enquanto as folhas das árvores balançam suavemente ao vento. É uma tarde tranquila de primavera, onde os pássaros cantam e as flores desabrocham em cores vibrantes. É um convite à contemplação e ao deleite da natureza.`
-  );
+  // const [text, setText] = useState(
+  //   `O sol brilha intensamente no céu azul, enquanto as folhas das árvores balançam suavemente ao vento. É uma tarde tranquila de primavera, onde os pássaros cantam e as flores desabrocham em cores vibrantes. É um convite à contemplação e ao deleite da natureza.`
+  // );
 
-  const googleTranslateElementInit = () => {
-    new window.google.translate.TranslateElement(
-      {
-        pageLanguage: "pt",
-        includedLanguages: "es,en",
-        autoDisplay: "false",
-        layout: google.translate.TranslateElement.InlineLayout.TOP_LEFT,
-      },
-      "google_translate_element"
-    );
-  };
+  // const googleTranslateElementInit = () => {
+  //   new window.google.translate.TranslateElement(
+  //     {
+  //       pageLanguage: "pt",
+  //       includedLanguages: "es,en",
+  //       autoDisplay: "false",
+  //       layout: google.translate.TranslateElement.InlineLayout.TOP_LEFT,
+  //     },
+  //     "google_translate_element"
+  //   );
+  // };
 
-  useEffectOnce(() => {
-    var addScript = document.createElement("script");
-    addScript.setAttribute(
-      "src",
-      "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-    );
-    document.body.appendChild(addScript);
-    window.googleTranslateElementInit = googleTranslateElementInit;
-  });
+  // useEffectOnce(() => {
+  //   var addScript = document.createElement("script");
+  //   addScript.setAttribute(
+  //     "src",
+  //     "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+  //   );
+  //   document.body.appendChild(addScript);
+  //   window.googleTranslateElementInit = googleTranslateElementInit;
+  // });
 
-  const ref = useRef(null);
+  // return (
+  //   <div className={""}>
+  //     {/* <div id="google_translate_element"></div> */}
 
-  useEffect(() => {
-    if (ref) console.log(ref.current.childNodes);
-  }, []);
-
-  return (
-    <div className={""}>
-      <div ref={ref} id="google_translate_element"></div>
-
-      <div className="w-50 m-auto">{text}</div>
-    </div>
-  );
+  //     <div className="w-50 m-auto">{text}</div>
+  //   </div>
+  // );
+  return <div>HOME</div>;
 }
